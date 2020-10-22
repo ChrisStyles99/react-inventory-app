@@ -21,6 +21,8 @@ const Product = (props) => {
     fetchItem();
   }, []);
 
+  if(singleItem === 'null') return <div className="items-error">You don't have permission to be here, login</div>
+
   return (
     <div className="product">
       <div className="product-title">

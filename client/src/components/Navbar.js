@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
-const Navbar = ({darkMode, toggleTheme}) => {
+const Navbar = ({darkMode, setDarkMode}) => {
 
   const [sidebar, setSidebar] = useState(false);
 
@@ -30,11 +30,11 @@ const Navbar = ({darkMode, toggleTheme}) => {
         <li style={{color: '#fff', cursor: 'pointer'}} onClick={removeToken}>
           Logout
         </li>
-        <li style={{color: '#fff', cursor: 'pointer'}} onClick={toggleTheme}>
+        <li style={{color: '#fff', cursor: 'pointer'}} onClick={() => setDarkMode(prevMode => !prevMode)}>
           {darkMode ? (
-            <i className="fas fa-moon"></i>
-          ) : (
             <i className="fas fa-sun"></i>
+          ) : (
+            <i className="fas fa-moon"></i>
           )}
         </li>
       </ul>

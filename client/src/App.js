@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import { getItems } from './actions/itemActions';
 import AddProductForm from './components/AddProductForm';
 import EditProductForm from './components/EditProductForm';
 import Footer from './components/Footer';
@@ -30,31 +29,23 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
 
 function App() {
 
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(getInitialMode());
 
-  const toggleTheme = () => {
-    setDarkMode(darkMode => !darkMode);
-    if(darkMode === true) {
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      localStorage.setItem('darkMode', 'false');
-    }
+  useEffect(() => {
+    localStorage.setItem('dark', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  function getInitialMode() {
+    const savedMode = JSON.parse(localStorage.getItem('dark'));
+    return savedMode || false;
   }
 
-  const getDarkMode = () => {
-    if(localStorage.getItem('darkMode') === 'true') {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  const isDarkMode = getDarkMode() ? 'dark' : ''
+  const isDarkMode = darkMode ? 'dark' : ''
 
   return (
-    <div className={'App ' + isDarkMode}>
+    <div className={`App ${isDarkMode}`}>
       <Router>
-        <Navbar darkMode={getDarkMode} toggleTheme={toggleTheme}/>
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode}/>
         <Switch>
           <ProtectedRoute exact path="/" component={InventoryGrid}>
           </ProtectedRoute>

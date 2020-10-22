@@ -8,8 +8,6 @@ const LoginForm = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  console.log(props);
-
   const handleSubmit = e => {
     e.preventDefault();
 

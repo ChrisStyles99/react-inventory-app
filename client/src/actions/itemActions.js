@@ -6,6 +6,12 @@ export const getItems = async(dispatch, getState) => {
       'auth-token': getState().userReducer.token
     }});
     const data = await res.data;
+    if(res.data.error === true) {
+      return dispatch({
+        type: 'GET_ITEMS',
+        payload: null
+      });
+    }
     dispatch({
       type: 'GET_ITEMS',
       payload: data
@@ -22,6 +28,12 @@ export const getSingleItem = id => {
         'auth-token': getState().userReducer.token
       }});
       const data = await res.data;
+      if(res.data.error === true) {
+        return dispatch({
+          type: 'GET_SINGLE_ITEM',
+          payload: 'null'
+        });
+      }
       dispatch({
         type: 'GET_SINGLE_ITEM',
         payload: data

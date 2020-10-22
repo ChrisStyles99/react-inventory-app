@@ -30,6 +30,8 @@ const EditProductForm = (props) => {
     props.history.push('/');
   };
 
+  if(singleItem === 'null') return <div className="items-error">You don't have permission to be here, login</div>
+
   return (
     <div className="edit-product">
       <form className="edit-form" onSubmit={handleUpdate}>

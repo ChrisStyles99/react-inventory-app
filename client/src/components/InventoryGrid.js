@@ -14,14 +14,9 @@ const InventoryGrid = () => {
 
   useEffect(() => {
     fetchItems();
-    console.log(items);
   }, []);
 
-  if(items === null) {
-    console.log('Null');
-  }
-
-  if(!items) return <div className="inventory">Loading...</div>
+  if(items === null || items === undefined) return <div className="items-error">You don't have permission to be here, login</div>
 
   return (
     <div className="inventory">
