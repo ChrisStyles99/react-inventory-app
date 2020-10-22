@@ -6,7 +6,7 @@ import { deleteItem, getSingleItem } from '../actions/itemActions';
 const Product = (props) => {
 
   const dispatch = useDispatch();
-  const singleItem = useSelector(state => state.singleItem);
+  const singleItem = useSelector(state => state.itemReducer.singleItem);
 
   const fetchItem = () => {
     dispatch(getSingleItem(props.match.params.id));

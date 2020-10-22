@@ -10,6 +10,8 @@ if(process.env.NODE_ENV !== 'production') {
 
 const port = process.env.PORT || 5000;
 
+const verifyToken = require('./routes/validateToken');
+
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
@@ -28,4 +30,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Routes
-app.use('/items', require('./routes/items'));
+app.use('/items', verifyToken, require('./routes/items'));
+app.use('/users', require('./routes/users'));

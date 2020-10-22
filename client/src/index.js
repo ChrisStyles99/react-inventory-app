@@ -7,11 +7,11 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import itemReducer from './reducers/items';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import allReducers from './reducers';
 
 const store = createStore(
-  itemReducer,
+  allReducers,
   composeWithDevTools(applyMiddleware(thunk))
 );
 

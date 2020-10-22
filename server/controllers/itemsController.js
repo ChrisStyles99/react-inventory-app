@@ -49,7 +49,7 @@ itemsController.updateItem = async(req, res) => {
   }
 
   try {
-    const updItem = await Item.findByIdAndUpdate(id, {$set: data});
+    const updItem = await Item.findByIdAndUpdate(id, {$set: data}, {new: true});
     return res.status(201).json({msg: 'Updated item', updItem});
   } catch (error) {
     return res.status(500).json(error);

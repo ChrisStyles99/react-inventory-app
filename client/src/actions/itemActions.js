@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-export const getItems = async(dispatch) => {
+export const getItems = async(dispatch, getState) => {
   try {
-    const res = await axios.get('http://localhost:5000/items');
+    const res = await axios.get('http://localhost:5000/items', {headers: {
+      'auth-token': getState().userReducer.token
+    }});
     const data = await res.data;
     dispatch({
       type: 'GET_ITEMS',
@@ -14,9 +16,11 @@ export const getItems = async(dispatch) => {
 }
 
 export const getSingleItem = id => {
-  return async(dispatch) => {
+  return async(dispatch, getState) => {
     try {
-      const res = await axios.get(`http://localhost:5000/items/${id}`);
+      const res = await axios.get(`http://localhost:5000/items/${id}`, {headers: {
+        'auth-token': getState().userReducer.token
+      }});
       const data = await res.data;
       dispatch({
         type: 'GET_SINGLE_ITEM',
@@ -29,9 +33,11 @@ export const getSingleItem = id => {
 }
 
 export const addItem = (newItem) => {
-  return async(dispatch) => {
+  return async(dispatch, getState) => {
     try {
-      const res = await axios.post('http://localhost:5000/items/new-item', newItem);
+      const res = await axios.post('http://localhost:5000/items/new-item', newItem, {headers: {
+        'auth-token': getState().userReducer.token
+      }});
       const data = await res.data.item;
       dispatch({
         type: 'ADD_ITEM',
@@ -44,9 +50,11 @@ export const addItem = (newItem) => {
 }
 
 export const deleteItem = id => {
-  return async(dispatch) => {
+  return async(dispatch, getState) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/items/delete-item/${id}`);
+      const res = await axios.delete(`http://localhost:5000/items/delete-item/${id}`, {headers: {
+        'auth-token': getState().userReducer.token
+      }});
       console.log(res);
       dispatch({
         type: 'REMOVE_ITEM',
@@ -59,9 +67,11 @@ export const deleteItem = id => {
 }
 
 export const updateItem = (id, updData) => {
-  return async(dispatch) => {
+  return async(dispatch, getState) => {
     try {
-      const res = await axios.put(`http://localhost:5000/items/edit-item/${id}`, updData);
+      const res = await axios.put(`http://localhost:5000/items/edit-item/${id}`, updData, {headers: {
+        'auth-token': getState().userReducer.token
+      }});
       const data = res.data.updItem;
       dispatch({
         type: 'UPDATE_ITEM',

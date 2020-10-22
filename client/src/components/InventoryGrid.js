@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 const InventoryGrid = () => {
 
   const dispatch = useDispatch();
-  const items = useSelector(state => state.items);
+  const items = useSelector(state => state.itemReducer.items);
 
   const fetchItems = () => {
     dispatch(getItems);
@@ -14,7 +14,12 @@ const InventoryGrid = () => {
 
   useEffect(() => {
     fetchItems();
+    console.log(items);
   }, []);
+
+  if(items === null) {
+    console.log('Null');
+  }
 
   if(!items) return <div className="inventory">Loading...</div>
 

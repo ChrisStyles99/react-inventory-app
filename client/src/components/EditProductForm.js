@@ -5,7 +5,7 @@ import { getSingleItem, updateItem } from '../actions/itemActions';
 const EditProductForm = (props) => {
 
   const dispatch = useDispatch();
-  const singleItem = useSelector(state => state.singleItem);
+  const singleItem = useSelector(state => state.itemReducer.singleItem);
 
   const fetchData = () => {
     dispatch(getSingleItem(props.match.params.id));
