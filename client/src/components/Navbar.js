@@ -1,36 +1,63 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
-const Navbar = ({darkMode, setDarkMode}) => {
-
+const Navbar = ({ darkMode, setDarkMode }) => {
   const [sidebar, setSidebar] = useState(false);
 
   const dispatch = useDispatch();
 
   const toggleSidebar = () => {
-    setSidebar(sidebar => !sidebar);
-  }
+    setSidebar((sidebar) => !sidebar);
+  };
 
   const removeToken = () => {
     dispatch(logout);
-  }
+  };
 
   const isActive = sidebar ? 'active' : '';
 
   return (
     <nav className="navbar">
-      <h1 className="logo"><Link className="nav-logo" to="/">Inventory app</Link></h1>
+      <h1 className="logo">
+        <NavLink
+          className="nav-logo" to="/">
+          Inventory app
+        </NavLink>
+      </h1>
       <ul className={'nav-list ' + isActive}>
-        <li><Link className="nav-link" to="/">View inventory</Link></li>
-        <li><Link className="nav-link" to="/add-product">Add product</Link></li>
-        <li><Link className="nav-link" to="/login">Login</Link></li>
-        <li style={{color: '#fff', cursor: 'pointer'}} onClick={removeToken}>
+        <li>
+          <NavLink exact activeStyle={{ backgroundColor: '#556e53' }} className="nav-link" to="/">
+            View inventory
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            activeStyle={{ backgroundColor: '#556e53' }}
+            className="nav-link"
+            to="/add-product"
+          >
+            Add product
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            activeStyle={{ backgroundColor: '#556e53' }}
+            className="nav-link"
+            to="/login"
+          >
+            Login
+          </NavLink>
+        </li>
+        <li style={{ color: '#fff', cursor: 'pointer' }} onClick={removeToken}>
           Logout
         </li>
-        <li style={{color: '#fff', cursor: 'pointer'}} onClick={() => setDarkMode(prevMode => !prevMode)}>
+        <li
+          style={{ color: '#fff', cursor: 'pointer' }}
+          onClick={() => setDarkMode((prevMode) => !prevMode)}
+        >
           {darkMode ? (
             <i className="fas fa-sun"></i>
           ) : (
@@ -42,7 +69,7 @@ const Navbar = ({darkMode, setDarkMode}) => {
         <i className="fas fa-bars"></i>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

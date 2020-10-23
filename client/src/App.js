@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import InventoryGrid from './components/InventoryGrid';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
+import NotFound from './components/NotFound';
 import Product from './components/Product';
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
@@ -57,7 +58,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/product/edit/:id" component={EditProductForm}>
           </ProtectedRoute>
-          <Route path="*" component={() => "404 NOT FOUND"}></Route>
+          <Route path="*" component={NotFound}></Route>
         </Switch>
         <Footer />
       </Router>

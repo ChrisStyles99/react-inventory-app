@@ -8,12 +8,12 @@ const Product = (props) => {
   const dispatch = useDispatch();
   const singleItem = useSelector(state => state.itemReducer.singleItem);
 
-  const fetchItem = () => {
-    dispatch(getSingleItem(props.match.params.id));
+  const fetchItem = async() => {
+    await dispatch(getSingleItem(props.match.params.id));
   };
 
-  const handleDelete = id => {
-    dispatch(deleteItem(id));
+  const handleDelete = async(id) => {
+    await dispatch(deleteItem(id));
     props.history.push('/');
   };
 

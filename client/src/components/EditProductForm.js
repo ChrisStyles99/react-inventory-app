@@ -11,6 +11,8 @@ const EditProductForm = (props) => {
     dispatch(getSingleItem(props.match.params.id));
   }
 
+  const id = props.match.params.id;
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -21,13 +23,13 @@ const EditProductForm = (props) => {
   const [image, setImage] = useState(singleItem.image);
   const [category, setCategory] = useState(singleItem.category);
 
-  const handleUpdate = e => {
+  const handleUpdate = async(e) => {
     e.preventDefault();
     const data = {
       name, description, quantity, image, category
     }
-    dispatch(updateItem(props.match.params.id, data));
-    props.history.push('/');
+    await dispatch(updateItem(id, data));
+    props.history.push(`/product/${id}`);
   };
 
   if(singleItem === 'null') return <div className="items-error">You don't have permission to be here, login</div>

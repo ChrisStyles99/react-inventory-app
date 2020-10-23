@@ -170,6 +170,12 @@
   align-items: center;
 }
 
+.login-div .error-msg {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #db5c5c;
+}
+
 .form-input {
   display: flex;
   flex-direction: column;
@@ -281,6 +287,15 @@
   justify-content: center;
   align-items: center;
   color: #fff;
+}
+
+.not-found {
+  min-height: 100vh;
+}
+
+.not-found h1 {
+  text-align: center;
+  margin-top: 20px;
 }
 
 @media (max-width: 992px) {

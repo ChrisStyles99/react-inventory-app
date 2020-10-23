@@ -32,10 +32,10 @@ userController.login = async(req, res) => {
 
   const user = await User.findOne({email: email});
 
-  if(!user) return res.status(404).json({error: true, msg: 'Email does not exists'});
+  if(!user) return res.json({error: true, msg: 'Email does not exists'});
 
   const validPassword = await bcrypt.compare(password, user.password);
-  if(!validPassword) return res.status(400).json({error: true, msg: 'Invalid password'});
+  if(!validPassword) return res.json({error: true, msg: 'Invalid password'});
 
   const token = jwt.sign({id: user._id},process.env.TOKEN_SECRET, {expiresIn: 60 * 60 * 24});
 

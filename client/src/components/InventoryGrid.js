@@ -8,8 +8,8 @@ const InventoryGrid = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.itemReducer.items);
 
-  const fetchItems = () => {
-    dispatch(getItems);
+  const fetchItems = async() => {
+    await dispatch(getItems);
   }
 
   useEffect(() => {

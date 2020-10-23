@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/userActions';
 
 const LoginForm = (props) => {
 
   const dispatch = useDispatch();
+  const error = useSelector(state => state.userReducer.userError);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if(email === '' || password === '') {
@@ -19,12 +20,18 @@ const LoginForm = (props) => {
       email,
       password
     }
-    dispatch(login(user));
+
+    await dispatch(login(user));
+    if(error !== null) return 
+    
     props.history.push('/');
   }
 
   return (
     <div className="login-div">
+      <div className="error-msg">
+        <h2>{error}</h2>
+      </div>
       <form className="login-form" onSubmit={handleSubmit}>
         <h1>Login</h1>
         <div className="form-input">

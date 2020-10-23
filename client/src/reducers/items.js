@@ -22,13 +22,7 @@ const itemReducer = (state = initialState, action) => {
       }
     case 'UPDATE_ITEM':
       return {
-        ...state,
-        items: state.items.map(item => {
-          if(item.id === action.id) {
-            return action.payload
-          }
-          return item
-        })
+        ...state
       }
     case 'GET_SINGLE_ITEM':
       return {

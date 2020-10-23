@@ -11,7 +11,7 @@ const AddProductForm = (props) => {
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('fruits');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const data = {
       name,
@@ -20,7 +20,7 @@ const AddProductForm = (props) => {
       image,
       category
     }
-    dispatch(addItem(data));
+    await dispatch(addItem(data));
     props.history.push('/');
   };
 

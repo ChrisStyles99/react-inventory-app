@@ -84,10 +84,9 @@ export const updateItem = (id, updData) => {
       const res = await axios.put(`http://localhost:5000/items/edit-item/${id}`, updData, {headers: {
         'auth-token': getState().userReducer.token
       }});
-      const data = res.data.updItem;
+      // const data = res.data.updItem;
       dispatch({
-        type: 'UPDATE_ITEM',
-        payload: data
+        type: 'UPDATE_ITEM'
       });
     } catch (error) {
       console.log(error);
