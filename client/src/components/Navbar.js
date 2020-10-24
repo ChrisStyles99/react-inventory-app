@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
 const Navbar = ({ darkMode, setDarkMode }) => {
   const [sidebar, setSidebar] = useState(false);
+
+  const isLoggedIn = useSelector(state => state.userReducer.isLoggedIn);
 
   const dispatch = useDispatch();
 
@@ -22,18 +24,19 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   return (
     <nav className="navbar">
       <h1 className="logo">
-        <NavLink
+        {isLoggedIn && <NavLink
           className="nav-logo" to="/">
           Inventory app
-        </NavLink>
+        </NavLink>}
+        {!isLoggedIn && 'Inventory app'}
       </h1>
       <ul className={'nav-list ' + isActive}>
-        <li>
+        {isLoggedIn && <li>
           <NavLink exact activeStyle={{ backgroundColor: '#556e53' }} className="nav-link" to="/">
             View inventory
           </NavLink>
-        </li>
-        <li>
+        </li>}
+        {isLoggedIn && <li>
           <NavLink
             activeStyle={{ backgroundColor: '#556e53' }}
             className="nav-link"
@@ -41,7 +44,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           >
             Add product
           </NavLink>
-        </li>
+        </li>}
         <li>
           <NavLink
             activeStyle={{ backgroundColor: '#556e53' }}
@@ -51,9 +54,9 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             Login
           </NavLink>
         </li>
-        <li style={{ color: '#fff', cursor: 'pointer' }} onClick={removeToken}>
+        {isLoggedIn && <li style={{ color: '#fff', cursor: 'pointer' }} onClick={removeToken}>
           Logout
-        </li>
+        </li>}
         <li
           style={{ color: '#fff', cursor: 'pointer' }}
           onClick={() => setDarkMode((prevMode) => !prevMode)}

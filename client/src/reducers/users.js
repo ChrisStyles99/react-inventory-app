@@ -1,6 +1,6 @@
 const initialState = {
   token: localStorage.getItem('token') || null,
-  isLoggedIn: false,
+  isLoggedIn: localStorage.getItem('token') ? true : false,
   userError: null
 }
 
@@ -14,12 +14,14 @@ const userReducer = (state = initialState, action) => {
     case 'LOGIN':
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
+        isLoggedIn: true
       }
     case 'LOGOUT':
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
+        isLoggedIn: false
       }
     default:
       return state
