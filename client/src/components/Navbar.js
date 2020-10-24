@@ -45,7 +45,16 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             Add product
           </NavLink>
         </li>}
-        <li>
+        {isLoggedIn && <li>
+          <NavLink
+            activeStyle={{ backgroundColor: '#556e53' }}
+            className="nav-link"
+            to="/search"
+          >
+            Search
+          </NavLink>
+        </li>}
+        {!isLoggedIn && <li>
           <NavLink
             activeStyle={{ backgroundColor: '#556e53' }}
             className="nav-link"
@@ -53,7 +62,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           >
             Login
           </NavLink>
-        </li>
+        </li>}
         {isLoggedIn && <li style={{ color: '#fff', cursor: 'pointer' }} onClick={removeToken}>
           Logout
         </li>}

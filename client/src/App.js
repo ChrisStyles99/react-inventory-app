@@ -9,6 +9,7 @@ import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
 import Product from './components/Product';
+import SearchItem from './components/SearchItem';
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
 
@@ -58,6 +59,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/product/edit/:id" component={EditProductForm}>
           </ProtectedRoute>
+          <ProtectedRoute path="/search" component={SearchItem}></ProtectedRoute>
           <Route path="*" component={NotFound}></Route>
         </Switch>
         <Footer />

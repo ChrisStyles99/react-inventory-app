@@ -81,7 +81,7 @@ export const deleteItem = id => {
 export const updateItem = (id, updData) => {
   return async(dispatch, getState) => {
     try {
-      const res = await axios.put(`http://localhost:5000/items/edit-item/${id}`, updData, {headers: {
+      await axios.put(`http://localhost:5000/items/edit-item/${id}`, updData, {headers: {
         'auth-token': getState().userReducer.token
       }});
       // const data = res.data.updItem;
