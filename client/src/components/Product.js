@@ -18,6 +18,9 @@ const Product = (props) => {
   };
 
   useEffect(() => {
+    if(props.match.params.id == 'undefined') {
+      return props.history.push('/add-product');
+    }
     fetchItem();
   }, []);
 
